@@ -1,11 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaLanchesWeb.Context;
+using SistemaLanchesWeb.Repositories;
+using SistemaLanchesWeb.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddTransient<ILancheRepository, LancheRepository>();
+builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 
 builder.Services.AddControllersWithViews();
 
