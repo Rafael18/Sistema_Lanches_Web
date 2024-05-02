@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaLanchesWeb.Context;
+using SistemaLanchesWeb.Models;
 using SistemaLanchesWeb.Repositories;
 using SistemaLanchesWeb.Repositories.Interfaces;
 
@@ -11,8 +12,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
 
 builder.Services.AddControllersWithViews();
+
+//Ativando o serviço de Cache e o Session para ser usado na aplicação
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -29,6 +36,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession(); //Configurando o Session para ser usado
 
 app.UseAuthorization();
 
