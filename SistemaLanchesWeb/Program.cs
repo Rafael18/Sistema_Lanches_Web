@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaLanchesWeb.Context;
 using SistemaLanchesWeb.Models;
@@ -42,7 +43,12 @@ app.UseSession(); //Configurando o Session para ser usado
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "categoriaFiltro",
+    pattern: "Lanche/{action}/{categoria?}",
+    defaults: new { Controller = "Lanche", action = "List" });
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+ 
 app.Run();
