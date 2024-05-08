@@ -12,6 +12,6 @@ namespace SistemaLanchesWeb.Context
         public DbSet<CarrinhoCompraItem> CarrinhoCompraItens { get; set; }
 
         public DbSet<Pedido> Pedidos { get; set; }
-        public DbSet<PedidoDetalhe> PedidoDetalhes { get;}
+        public DbSet<PedidoDetalhe> PedidoDetalhes { get; set; }
     }
 }
