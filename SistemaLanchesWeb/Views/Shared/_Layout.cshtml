@@ -23,14 +23,25 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Lanche" asp-action="List">Lanches</a>
+                            @await Component.InvokeAsync("CategoriaMenu")
+                        </li>
+                        <li class="nav-item">
+                            @await Component.InvokeAsync("CarrinhoCompraResumo")
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>
                         </li>
                         <li class="nav-item">
                             @await Component.InvokeAsync("CarrinhoCompraResumo")
-                        </li
+                        </li>
+
+                        <li class="nav-item">
+                            <form class="navbar-form navbar-right" asp-controller="Lanche" asp-action="Search" method="get">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Procurar produto" name="searchString" value="@ViewData["searchString"]" />
+                                </div>
+                            </form>
+                        </li>
 
                     </ul>
                 </div>
