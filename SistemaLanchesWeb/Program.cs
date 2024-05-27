@@ -5,6 +5,7 @@ using SistemaLanchesWeb.Context;
 using SistemaLanchesWeb.Models;
 using SistemaLanchesWeb.Repositories;
 using SistemaLanchesWeb.Repositories.Interfaces;
+using SistemaLanchesWeb.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,16 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<IPedidoRepository, PedidoRepository>();
+builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin",
+        politica =>
+        {
+            politica.RequireRole("Admin");
+        });
+});
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
@@ -63,6 +74,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+      );
+
+
+app.MapControllerRoute(
     name: "categoriaFiltro",
     pattern: "Lanche/{action}/{categoria?}",
     defaults: new { Controller = "Lanche", action = "List" });
@@ -70,5 +87,5 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
- 
+
 app.Run();
