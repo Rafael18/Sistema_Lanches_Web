@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
+using SistemaLanchesWeb.Areas.Admin.Servicos;
 using SistemaLanchesWeb.Context;
 using SistemaLanchesWeb.Models;
 using SistemaLanchesWeb.Repositories;
@@ -32,6 +34,7 @@ builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<IPedidoRepository, PedidoRepository>();
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+builder.Services.AddScoped<RelatorioVendasService>();
 
 builder.Services.AddAuthorization(options =>
 {
@@ -46,6 +49,12 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
 
 builder.Services.AddControllersWithViews();
+
+//Serviço do ReflecionIT.Mvc.Paging
+builder.Services.AddPaging(options => {
+    options.ViewName = "Bootstrap5";
+    options.PageParameterName = "pageindex";
+});
 
 //Ativando o serviço de Cache e o Session para ser usado na aplicação
 builder.Services.AddMemoryCache();

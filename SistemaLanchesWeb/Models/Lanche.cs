@@ -11,19 +11,19 @@ namespace SistemaLanchesWeb.Models
 
         [Required(ErrorMessage = "O Nome do lanche deve ser informado.")]
         [StringLength(80, MinimumLength = 10, ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo {2} caracteres.")]
-        [Display(Name = "Nome")]
+        [Display(Name = "Nome do lache")]
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "A Descrição Detalhada do lanche deve ser informado.")]
         [MinLength(20, ErrorMessage = "Descrição de ter no minimo {1} caracteres.")]
         [MaxLength(200, ErrorMessage = "Descrição não pode exceder {1} caracteres.")]
-        [Display(Name = "Descrição  detalahada do Lanche")]
+        [Display(Name = "Descrição do Lanche")]
         public string DescricaoCurta { get; set; }
 
         [Required(ErrorMessage = "A Descrição do lanche deve ser informado.")]
         [MinLength(20, ErrorMessage = "Descrição de ter no minimo {1} caracteres.")]
         [MaxLength(200, ErrorMessage = "Descrição não pode exceder {1} caracteres.")]
-        [Display(Name = "Descrição do Lanche")]
+        [Display(Name = "Descrição  detalhada do Lanche")]
         public string DescricaoDetalhada { get; set; }
 
         [Required(ErrorMessage = "O Preço do lanche deve ser informado.")]
@@ -47,6 +47,7 @@ namespace SistemaLanchesWeb.Models
         public bool EmEstoque { get; set; }
 
         //Relacionamento entre as tabelas Lanche x Gategoria
+        [Display(Name="Categorias")]
         public int CategoriaId { get; set; }
         public virtual Categoria Categoria { get; set; }
     }

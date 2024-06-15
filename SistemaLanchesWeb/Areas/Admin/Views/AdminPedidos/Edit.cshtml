@@ -69,7 +69,17 @@
                 <span asp-validation-for="PedidoEntregueEm" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="TotalItensPedido" class="control-label"></label>
+                <input asp-for="TotalItensPedido" class="form-control" disabled />
+                <span asp-validation-for="TotalItensPedido" class="text-danger"></span>
+            </div
+            <div class="form-group">
+                <label asp-for="PedidoTotal" class="control-label"></label>
+                <input asp-for="PedidoTotal" class="form-control" disabled />
+                <span asp-validation-for="PedidoTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>

@@ -1,13 +1,12 @@
 ﻿@model SistemaLanchesWeb.Models.Lanche
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detatlhes";
 }
 
-<h1>Details</h1>
+<h1>Detalhe do Lache #@Model.LancheId</h1>
 
 <div>
-    <h4>Lanche</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -67,6 +66,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.LancheId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.LancheId" class="btn btn-warning">Editar</a> |
+    <a asp-action="Index" class="btn btn-success">Retornar</a>
 </div>
